@@ -78,11 +78,8 @@ GameOfLife/
 │               ├── Grid.java           # Core grid logic and game rules implementation
 │               ├── CellState.java      # Enum defining cell states (ALIVE/DEAD)
 │               └── GameOfLifeUI.java   # Swing-based graphical user interface
-├── bin/                               # Compiled class files (generated)
-├── lib/                               # External libraries (if any)
-├── resources/                         # Additional resources (images, configs)
+├── bin/                               # After Compiling project files (generated)
 ├── README.md                          # Project documentation
-├── LICENSE                            # MIT License
 └── .gitignore                         # Git ignore rules
 ```
 
