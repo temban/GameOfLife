@@ -100,11 +100,6 @@ public enum CellState {
 #### 2. `Grid.java` - Business Logic Layer
 ```java
 public class Grid {
-    // Handles all game rules and grid operations
-    public void nextGeneration() { ... }
-    private int countLiveNeighbors(int x, int y) { ... }
-    public void setCell(int x, int y, CellState state) { ... }
-    // ... other core methods
 }
 ```
 - **Responsibilities**:
@@ -116,11 +111,6 @@ public class Grid {
 #### 3. `GameOfLife.java` - Application Controller
 ```java
 public class GameOfLife {
-    // Manages simulation flow and timing
-    public void start() { ... }
-    public void stop() { ... }
-    public void step() { ... }
-    // ... simulation control methods
 }
 ```
 - **Responsibilities**:
@@ -132,9 +122,6 @@ public class GameOfLife {
 #### 4. `GameOfLifeUI.java` - Presentation Layer
 ```java
 public class GameOfLifeUI extends JFrame {
-    // Swing-based user interface
-    private class GridPanel extends JPanel { ... }
-    // ... UI components and event handlers
 }
 ```
 - **Responsibilities**:
