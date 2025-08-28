@@ -1,5 +1,5 @@
 
-# GameOfLife (Java, Swing)
+# GameOfLife (Java)
 
 A minimal **Conway's Game of Life** implementation with a simple Swing UI.
 
