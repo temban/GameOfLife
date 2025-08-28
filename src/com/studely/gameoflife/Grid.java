@@ -1,12 +1,8 @@
-// File: Grid.java
 package com.studely.gameoflife;
 
 import java.util.Random;
 
-/**
- * Represents the grid of cells for the Game of Life simulation.
- * Handles the core logic and rules of the game.
- */
+
 public class Grid {
     private final int width;
     private final int height;
@@ -27,13 +23,9 @@ public class Grid {
         this.nextGrid = new CellState[height][width];
         this.random = new Random();
         
-        // Initialize grids with dead cells
         clear();
     }
     
-    /**
-     * Advances the simulation by one generation according to the rules of the Game of Life.
-     */
     public void nextGeneration() {
         // Apply rules to each cell
         for (int y = 0; y < height; y++) {
@@ -53,7 +45,6 @@ public class Grid {
             }
         }
         
-        // Swap grids for the next iteration
         CellState[][] temp = currentGrid;
         currentGrid = nextGrid;
         nextGrid = temp;
@@ -69,10 +60,9 @@ public class Grid {
     private int countLiveNeighbors(int x, int y) {
         int count = 0;
         
-        // Check all 8 neighbors with toroidal (wrapping) boundaries
         for (int dy = -1; dy <= 1; dy++) {
             for (int dx = -1; dx <= 1; dx++) {
-                if (dx == 0 && dy == 0) continue; // Skip the cell itself
+                if (dx == 0 && dy == 0) continue;
                 
                 int nx = (x + dx + width) % width;
                 int ny = (y + dy + height) % height;
@@ -113,9 +103,6 @@ public class Grid {
         return CellState.DEAD;
     }
     
-    /**
-     * Clears the grid (sets all cells to dead).
-     */
     public void clear() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {

@@ -109,7 +109,6 @@ public class GameOfLifeUI extends JFrame {
             game.setDelay(delay);
         });
         
-        // Add pattern menu
         JMenuBar menuBar = new JMenuBar();
         JMenu patternsMenu = new JMenu("Patterns");
         
@@ -220,7 +219,6 @@ public class GameOfLifeUI extends JFrame {
             
             Grid grid = game.getGrid();
             
-            // Draw cells
             for (int y = 0; y < grid.getHeight(); y++) {
                 for (int x = 0; x < grid.getWidth(); x++) {
                     if (grid.getCell(x, y) == CellState.ALIVE) {

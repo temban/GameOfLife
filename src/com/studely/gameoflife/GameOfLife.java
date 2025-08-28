@@ -1,10 +1,5 @@
-// File: GameOfLife.java
 package com.studely.gameoflife;
 
-/**
- * Main class for the Game of Life application.
- * Contains the entry point and manages the simulation loop.
- */
 public class GameOfLife {
     private Grid grid;
     private volatile boolean running;
@@ -21,12 +16,9 @@ public class GameOfLife {
         this.grid = new Grid(width, height);
         this.running = false;
         this.generation = 0;
-        this.delayMs = 100; // Default delay
+        this.delayMs = 100;
     }
     
-    /**
-     * Starts the simulation.
-     */
     public void start() {
         if (!running) {
             running = true;
@@ -34,24 +26,15 @@ public class GameOfLife {
         }
     }
     
-    /**
-     * Stops the simulation.
-     */
     public void stop() {
         running = false;
     }
-    
-    /**
-     * Advances the simulation by one generation.
-     */
+
     public void step() {
         grid.nextGeneration();
         generation++;
     }
     
-    /**
-     * The main simulation loop.
-     */
     private void runSimulation() {
         Thread simulationThread = new Thread(() -> {
             while (running) {
@@ -59,7 +42,6 @@ public class GameOfLife {
                 
                 step();
                 
-                // Calculate time to wait to maintain consistent frame rate
                 long processingTime = System.currentTimeMillis() - startTime;
                 long sleepTime = Math.max(0, delayMs - processingTime);
                 
@@ -76,17 +58,11 @@ public class GameOfLife {
         simulationThread.start();
     }
     
-    /**
-     * Clears the grid.
-     */
     public void clear() {
         grid.clear();
         generation = 0;
     }
     
-    /**
-     * Randomizes the grid with approximately 30% alive cells.
-     */
     public void randomize() {
         grid.randomize(0.3);
         generation = 0;
@@ -134,7 +110,6 @@ public class GameOfLife {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        // Create and display the UI on the Event Dispatch Thread
         javax.swing.SwingUtilities.invokeLater(() -> {
             GameOfLife game = new GameOfLife(60, 40);
             GameOfLifeUI ui = new GameOfLifeUI(game);
