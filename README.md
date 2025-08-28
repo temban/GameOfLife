@@ -66,13 +66,130 @@ The application includes several famous Game of Life patterns:
 - A complex period 3 oscillator with fascinating behavior
 - One of the most well-known patterns in Game of Life
 
+## 📁 Project Structure
+
+```
+GameOfLife/
+├── src/
+│   └── com/
+│       └── studely/
+│           └── gameoflife/
+│               ├── GameOfLife.java     # Main application class and simulation controller
+│               ├── Grid.java           # Core grid logic and game rules implementation
+│               ├── CellState.java      # Enum defining cell states (ALIVE/DEAD)
+│               └── GameOfLifeUI.java   # Swing-based graphical user interface
+├── bin/                               # Compiled class files (generated)
+├── lib/                               # External libraries (if any)
+├── resources/                         # Additional resources (images, configs)
+├── README.md                          # Project documentation
+├── LICENSE                            # MIT License
+└── .gitignore                         # Git ignore rules
+```
+
+## 🏗️ Architecture Overview
+
+### **Core Components:**
+
+#### 1. `CellState.java` - Data Model
+```java
+public enum CellState {
+    ALIVE,   // Represents a living cell
+    DEAD     // Represents a dead/empty cell
+}
+```
+- **Purpose**: Simple enum defining the two possible states of a cell
+- **Role**: Foundation for the entire simulation's data representation
+
+#### 2. `Grid.java` - Business Logic Layer
+```java
+public class Grid {
+    // Handles all game rules and grid operations
+    public void nextGeneration() { ... }
+    private int countLiveNeighbors(int x, int y) { ... }
+    public void setCell(int x, int y, CellState state) { ... }
+    // ... other core methods
+}
+```
+- **Responsibilities**:
+  - Implements Conway's Game of Life rules
+  - Manages cell states and neighbor calculations
+  - Handles toroidal boundary conditions (wrapping edges)
+  - Provides pattern generation (glider, blinker, pulsar)
+
+#### 3. `GameOfLife.java` - Application Controller
+```java
+public class GameOfLife {
+    // Manages simulation flow and timing
+    public void start() { ... }
+    public void stop() { ... }
+    public void step() { ... }
+    // ... simulation control methods
+}
+```
+- **Responsibilities**:
+  - Main application entry point
+  - Simulation thread management
+  - Generation timing and pacing
+  - Coordination between grid and UI
+
+#### 4. `GameOfLifeUI.java` - Presentation Layer
+```java
+public class GameOfLifeUI extends JFrame {
+    // Swing-based user interface
+    private class GridPanel extends JPanel { ... }
+    // ... UI components and event handlers
+}
+```
+- **Responsibilities**:
+  - Graphical rendering of the grid
+  - User interaction handling (clicks, drags, buttons)
+  - Control panel management
+  - Real-time visualization updates
+
+## 🔄 Data Flow
+
+1. **User Interaction** → `GameOfLifeUI` handles input events
+2. **UI Commands** → `GameOfLife` controller processes requests
+3. **Logic Execution** → `Grid` performs calculations and updates state
+4. **Visual Feedback** → `GameOfLifeUI` repaints the updated grid
+
+## 🎯 Design Patterns Used
+
+### **Model-View-Controller (MVC) Pattern:**
+- **Model**: `Grid` + `CellState` (data and business logic)
+- **View**: `GameOfLifeUI` (presentation layer)
+- **Controller**: `GameOfLife` (mediates between model and view)
+
+### **Observer Pattern:**
+- UI components observe simulation state changes
+- Real-time updates through repaint triggers
+
+### **Strategy Pattern:**
+- Different pattern generators (glider, blinker, pulsar)
+- Extensible for additional patterns
+
 ## 🚀 How to Run the Application
 
 ### Prerequisites:
 - Java JDK 8 or higher
 - Git (for cloning the repository)
 
-### Running from Source:
+### **Compilation:**
+```bash
+# Navigate to project root
+cd GameOfLife
+
+# Compile all source files
+javac -d bin src/com/studely/gameoflife/*.java
+```
+
+### **Execution:**
+```bash
+# Run the application
+java -cp bin com.studely.gameoflife.GameOfLife
+```
+
+### **Running from Source:**
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/game-of-life.git
@@ -87,9 +204,15 @@ javac -d bin src/com/studely/gameoflife/*.java
 java -cp bin com.studely.gameoflife.GameOfLife
 ```
 
-### Running the JAR file:
+### **Running the JAR file:**
 ```bash
 java -jar game-of-life.jar
+```
+
+### **Creating JAR:**
+```bash
+# Create executable JAR
+jar cfe game-of-life.jar com.studely.gameoflife.GameOfLife -C bin .
 ```
 
 ## ⭐ Standout Features
@@ -138,6 +261,31 @@ java -jar game-of-life.jar
 3. **Experiment**: Try drawing your own patterns and see how they evolve
 4. **Use Patterns**: Load predefined patterns to see classic Game of Life behaviors
 5. **Step Through**: Use "Step" to carefully observe complex pattern evolution
+
+## 🛠️ Development Features
+
+### **Modularity:**
+- Clean separation of concerns
+- Easy to extend or modify individual components
+- Independent testing capabilities
+
+### **Extensibility:**
+- Add new patterns by extending Grid class
+- Modify rendering by updating GameOfLifeUI
+- Change simulation rules in Grid.nextGeneration()
+
+### **Maintainability:**
+- Comprehensive JavaDoc documentation
+- Consistent coding style
+- Clear method and variable naming
+
+## 🔧 Technical Stack
+
+- **Language**: Java 8+
+- **GUI Framework**: Java Swing
+- **Concurrency**: Java Threads for simulation pacing
+- **Build Tool**: Standard Java compiler (javac)
+- **Version Control**: Git with proper .gitignore
 
 ## 🎓 Learning Opportunities
 
